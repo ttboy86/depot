@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PragSex Online store</title>
+
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body class='<%= controller.controller_name %>'>
+	<div id="banner" >
+		<%= image_tag("logo.png") %>
+		<%= @page_title || "Sexmatic Catalog" %>
+	</div>
+	
+	<div id="columns">
+		<div id="side">
+			<ul>
+				<li><a href="/">Home</a></li>
+				<li><a href="/faq">Questions</a></li>
+				<li><a href="/news">News</a></li>
+				<li><a href="/contact">Contact</a></li>
+				<li><a><br />Generated <%= distance_of_time_in_words_to_now(Time.now, true) %> ago for <%= session[:visits] %> times</a></li>
+			</ul>
+			
+		</div>
+	
+<div id="main">
+<%= yield %>
+</div>
+</div>
+</body>
+</html>
