@@ -72,6 +72,23 @@ class LineItemsController < ApplicationController
     end
   end
 
+  #GET /line_items/1/decrement
+  def decrement
+    @line_item = LineItem.find(params[:id])
+    @line_item.quantity -= 1
+    
+    if @line_item.quantity == 0 
+      @line_item.destroy
+    else
+      @line_item.save
+    end
+    
+    respond_to do |format|
+      format.html{ redirect_to line_items_path, notice: "Line Item decremented or deleted" }
+    end
+  end
+    
+
   # DELETE /line_items/1
   # DELETE /line_items/1.json
   def destroy

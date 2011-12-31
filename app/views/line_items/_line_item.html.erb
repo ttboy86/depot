@@ -6,5 +6,5 @@
 	
 <td><%= line_item.quantity %>&times;</td>
 <td><%= line_item.product.title %></td>
-<td class="item_price"><%= number_to_currency(line_item.total_price, :precision => 2, :separator => ",", :delimeter => ".", :unit => "R$") %></td>
+<td class="item_price"><%= number_to_currency(line_item.total_price, :precision => 2, :separator => ",", :delimeter => ".", :unit => "R$") %></td><%= button_to 'Decrement', decrement_line_item_path(line_item), confirm: "Are you sure ??" %>
 </tr>
