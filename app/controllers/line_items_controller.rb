@@ -74,17 +74,20 @@ class LineItemsController < ApplicationController
 
   #GET /line_items/1/decrement
   def decrement
-    @line_item = LineItem.find(params[:id])
-    @line_item.quantity -= 1
-    
-    if @line_item.quantity == 0 
-      @line_item.destroy
-    else
-      @line_item.save
-    end
+	@cart = current_cart
+    @line_item = @cart.decrement_line_item_quantity(params[:id])
+
     
     respond_to do |format|
-      format.html{ redirect_to line_items_path, notice: "Line Item decremented or deleted" }
+	if @line_item.save
+	  format.js  { @current_item = @line_item }
+      format.html{ redirect_to store_path }
+	  format.json { head :ok }
+	  else
+	  format.js { @current_item = @line_item }
+      format.html{ render action: "edit" }
+	  format.json { head :ok }
+	  end
     end
   end
     
