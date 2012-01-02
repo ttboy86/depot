@@ -6,7 +6,7 @@
 development:
   adapter: sqlite3
   encoding: unicode
-  database: Depot
+  database: db/Depot.devel
   pool: 5
   timeout: 5000
 
