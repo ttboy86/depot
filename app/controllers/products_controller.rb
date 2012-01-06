@@ -84,6 +84,7 @@ class ProductsController < ApplicationController
   def who_bought
 	  @product = Product.find(params[:id])
 	  respond_to do |format|
+		  format.html { }
 		  format.atom
 	  end
   end
