@@ -17,7 +17,8 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @product }
+      format.json { render :json => @product }
+      format.xml { render :xml => @product }
     end
   end
 
@@ -86,6 +87,8 @@ class ProductsController < ApplicationController
 	  respond_to do |format|
 		  format.html { }
 		  format.atom
+		  format.xml{ render :xml => @product.to_xml(:include => :orders) } 
+		  format.json{ render :json => @product.to_json(:include => :orders )}
 	  end
   end
   
