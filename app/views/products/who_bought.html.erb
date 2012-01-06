@@ -1,42 +1,36 @@
 
-  <p><%= "Who bought #{@product.title}" %></p>
+  <p>"Who bought <%= @product.title %>"</p>
 
-<%=
+<%
   latest_order = @product.orders.sort_by(&:updated_at).last
-
-
   @product.orders.each do |order| %>
-      puts "Order #{order.id}"
-      order.summary type: 'xhtml' do |xhtml|
-        xhtml.p "Shipped to #{order.address}"
-
-        xhtml.table do
-          xhtml.tr do
-            xhtml.th 'Product'
-            xhtml.th 'Quantity'
-            xhtml.th 'Total Price'
-          end
-		  
-          order.line_items.each do |item|
-            xhtml.tr do
-              xhtml.td item.product.title
-              xhtml.td item.quantity
-              xhtml.td number_to_currency item.total_price
-            end
-          end
-		  
-          xhtml.tr do
-            xhtml.th 'total', colspan: 2
-            xhtml.th number_to_currency \
-              order.line_items.map(&:total_price).sum
-          end
-        end
-
-        xhtml.p "Paid by #{order.pay_type}"
-   
+  
+<div class="summary">
+Order <%= order.id %>
       
-      end
+        <p>"Shipped to <%= order.address %></p>
 
-
-end
-%>
+        <table> 
+          <tr>
+            <th> Product</th>
+            <th> Quantity</th>
+            <th> Total Price</th>
+          </tr>
+		  
+         <% order.line_items.each do |item| %>
+           <tr> 
+              <td> <%= item.product.title %> </td>
+              <td> <%= item.quantity %> </td>
+              <td> <%= number_to_currency item.total_price %> </td>
+            </tr>
+          <% end %>
+		  
+          <tr>
+            <th colspan=2 > total</th>
+            <th> <%= number_to_currency order.line_items.map(&:total_price).sum %>
+	</th>
+			</tr>
+</table>
+        <p> Paid by <%= order.name %> (<%= order.email %>) using <%= order.pay_type %></p>
+</div>
+<% end %>
