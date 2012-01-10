@@ -36,3 +36,6 @@ Product.create(
 :price => 10.95,
 :image_url => '4.jpg'
 )
+PayType.create(:name => "Check")
+PayType.create(:name => "Credit card")
+PayType.create(:name => "Purchase order")
