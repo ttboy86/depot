@@ -27,6 +27,13 @@
     <%= f.label :pay_type %><br />
     <%= f.select :pay_type , PayType.names , prompt: 'Select a payment method'	%>
   </div>
+  <% unless @order.nil? %>
+   <div class="field">
+   <%= f.label :shipped_date %><br />
+   <%= date_select("order", "shipped_date", :start_year => 2010, :use_month_numbers => true,
+                               :include_blank => false) %>
+  </div>
+  <% end %>
   <div class="actions">
     <%= f.submit 'Place Order' %>
   </div>
